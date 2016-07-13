@@ -1,7 +1,6 @@
 package com.fxtv.framework.system;
 
 import com.fxtv.framework.frame.BaseSystem;
-import com.umeng.analytics.MobclickAgent;
 
 /**
  * 崩溃log收集系统
@@ -14,8 +13,8 @@ public class SystemCrashLogCollect extends BaseSystem {
     protected void init() {
         super.init();
         // umeng
-        MobclickAgent.setCatchUncaughtExceptions(SystemManager.getInstance()
-                .getSystem(SystemFrameworkConfig.class).mCrashLogNet);
+//        MobclickAgent.setCatchUncaughtExceptions(SystemManager.getInstance()
+//                .getSystem(SystemFrameworkConfig.class).mCrashLogNet);
     }
 
     @Override

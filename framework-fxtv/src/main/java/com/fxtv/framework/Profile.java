@@ -3,7 +3,6 @@ package com.fxtv.framework;
 import android.content.Context;
 
 import com.fxtv.framework.system.SystemCrash;
-import com.fxtv.framework.system.SystemFrameworkConfig;
 import com.fxtv.framework.system.SystemManager;
 
 /**
@@ -11,10 +10,14 @@ import com.fxtv.framework.system.SystemManager;
  */
 public class Profile {
     public static Context mContext;
+    public static Configuration mConfiguration;
 
-    public static void initProfile(Context context) {
+    public static void initProfile(Context context, Configuration configuration) {
         mContext = context;
+        if (configuration == null) {
+            configuration = new Configuration.Builder().setDebugModel(false).build();
+        }
+        mConfiguration = configuration;
         SystemManager.getInstance().getSystem(SystemCrash.class);
-        SystemManager.getInstance().getSystem(SystemFrameworkConfig.class);
     }
 }

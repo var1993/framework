@@ -120,13 +120,13 @@ public class SystemHttp extends BaseSystem {
                     long tmp = System.currentTimeMillis() - cache.time;
                     if (FrameworkUtils.isMobileConnected(mContext)) {
                         // 数据流量
-                        if (tmp > SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).mHttpCacheGprsPastTime) {
+                        if (tmp > Profile.mConfiguration.getCacheValidityDataFlawRate()) {
                             Logger.d(TAG_REQUEST, String.format("net,flag=%s,gprs start update cache", requestData.getLogFlag()));
                             netDispatcher(context, requestData, MODEL_CACHE_UPDATE, null);
                         }
                     } else if (FrameworkUtils.isWifiConnected(mContext)) {
                         // wifi
-                        if (tmp > SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).mHttpCacheWifiPastTime) {
+                        if (tmp > Profile.mConfiguration.getCacheValidityDataWifiRate()) {
                             Logger.d(TAG_REQUEST, String.format("net,flag=%s,wifi start update cache", requestData.getLogFlag()));
                             netDispatcher(context, requestData, MODEL_CACHE_UPDATE, null);
                         }

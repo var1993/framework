@@ -10,10 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.fxtv.framework.system.SystemFrameworkConfig;
 import com.fxtv.framework.utils.FrameworkUtils;
 import com.fxtv.framework.R;
-import com.fxtv.framework.system.SystemManager;
 
 /**
  * Created by wzh on 2016/3/7.
@@ -23,7 +21,7 @@ import com.fxtv.framework.system.SystemManager;
  */
 public class ToolBarHelperView extends FrameLayout {
 
-    private String TAG="ToolBarHelperView";
+    private String TAG = "ToolBarHelperView";
     /*toolbar*/
     private Toolbar mToolBar;
     private int mToolBarHeight;
@@ -61,7 +59,7 @@ public class ToolBarHelperView extends FrameLayout {
         /*初始化toolbar*/
         initToolBar(array);
         /*初始化用户定义的布局*/
-        initUserView(rootView,array);
+        initUserView(rootView, array);
         array.recycle();
     }
 
@@ -73,72 +71,70 @@ public class ToolBarHelperView extends FrameLayout {
     }
 
     private void initToolBar(TypedArray typedArray) {
-        toolbarView = LayoutInflater.from(getContext()).inflate(R.layout.view_toolbar, this,false);
+        toolbarView = LayoutInflater.from(getContext()).inflate(R.layout.view_toolbar, this, false);
         mToolBar = (Toolbar) toolbarView.findViewById(R.id.toolbar);
 
-        changeStatusHeight(mToolBar,typedArray);
+        changeStatusHeight(mToolBar, typedArray);
 
     }
 
-    private void initUserView(View rootView,TypedArray typedArray) {
-        ViewGroup.LayoutParams oldParams=rootView.getLayoutParams();
-        int width,height;
-        if(oldParams!=null){
-            width=oldParams.width;
-            height=oldParams.height;
-        }else{
-            width=LayoutParams.MATCH_PARENT;
-            height=LayoutParams.MATCH_PARENT;
+    private void initUserView(View rootView, TypedArray typedArray) {
+        ViewGroup.LayoutParams oldParams = rootView.getLayoutParams();
+        int width, height;
+        if (oldParams != null) {
+            width = oldParams.width;
+            height = oldParams.height;
+        } else {
+            width = LayoutParams.MATCH_PARENT;
+            height = LayoutParams.MATCH_PARENT;
         }
 
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width,height);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
 
         boolean overly = typedArray.getBoolean(0, false);
 
         /*获取主题中定义的toolbar的高度*/
-        if(mToolBarHeight<=0){
-            mToolBarHeight= (int) typedArray.getDimension(1,100);
+        if (mToolBarHeight <= 0) {
+            mToolBarHeight = (int) typedArray.getDimension(1, 100);
         }
-       // Logger.d(TAG," overly="+overly+" toolBarSize="+mToolBarHeight +" "+getContext().getResources().getDimension(R.dimen.abc_action_bar_default_height_material));
+        // Logger.d(TAG," overly="+overly+" toolBarSize="+mToolBarHeight +" "+getContext().getResources().getDimension(R.dimen.abc_action_bar_default_height_material));
         /*如果是悬浮状态 或者toolbar隐藏时，则不需要设置间距*/
-        params.topMargin = overly || toolbarView.getVisibility() == View.GONE? 0 : mToolBarHeight;
+        params.topMargin = overly || toolbarView.getVisibility() == View.GONE ? 0 : mToolBarHeight;
         addView(rootView, params);
 
         //先添加rootview,再添加toolbar
-        if(statusView!=null){
+        if (statusView != null) {
             addView(statusView);
         }
-        addView(toolbarView,toolbarView.getLayoutParams());
+        addView(toolbarView, toolbarView.getLayoutParams());
     }
 
     /**
      * 改变高度,加上status高
+     *
      * @param toolbar
      */
-    private void changeStatusHeight(Toolbar toolbar,TypedArray array){
+    private void changeStatusHeight(Toolbar toolbar, TypedArray array) {
         //sdk 19以上支持 是否设置为透明状态栏
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && array.getBoolean(2,false)){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && array.getBoolean(2, false)) {
             FrameLayout.LayoutParams params;
-            if(toolbar!=null && (params = (LayoutParams) toolbar.getLayoutParams()) !=null){
+            if (toolbar != null && (params = (LayoutParams) toolbar.getLayoutParams()) != null) {
 
-                int StatusBarHeight= SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).StatusBarHeight;
-                if(StatusBarHeight<=0){
-                    StatusBarHeight =  SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).StatusBarHeight=FrameworkUtils.getStatusBarHeight(getContext());
-                }
+                int StatusBarHeight = FrameworkUtils.getStatusBarHeight(getContext());
                 //创建一个状态栏高的view
-                statusView=new View(getContext());
+                statusView = new View(getContext());
                /* int color=getResources().getColor(R.color.color_primary_dark);
                 if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
                     color=array.getColor(3,color);
                 }*/
 //                StatusBarHeight=(int)((double)StatusBarHeight*4/5);//原状态栏的4/5高
-                statusView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,StatusBarHeight));
+                statusView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, StatusBarHeight));
                 statusView.setBackgroundResource(R.drawable.status_background);
 
-                if(params.height>0){
-                    params.topMargin+=StatusBarHeight;
+                if (params.height > 0) {
+                    params.topMargin += StatusBarHeight;
                 }
-                mToolBarHeight=params.height+StatusBarHeight;
+                mToolBarHeight = params.height + StatusBarHeight;
 
             }
         }

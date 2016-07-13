@@ -36,9 +36,9 @@ public class SystemCrash extends BaseSystem {
 	@Override
 	protected void init() {
 		super.init();
-		if (SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).mCrashHander) {
-			open();
-		}
+//		if (SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).mCrashHander) {
+//			open();
+//		}
 	}
 
 	@Override
@@ -64,16 +64,16 @@ public class SystemCrash extends BaseSystem {
 				String message = ex.getMessage();
 				Logger.e(TAG, "uncaughtException,happen error=" + obtainExceptionInfo(ex));
 
-				if (SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).mCrashLogNative) {
-					String crash = savaInfoToSD(mContext, ex);
-					Logger.e(TAG, "crash=" + crash);
-					// upLoadCrash(crash);
-				}
+//				if (SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).mCrashLogNative) {
+//					String crash = savaInfoToSD(mContext, ex);
+//					Logger.e(TAG, "crash=" + crash);
+//					 upLoadCrash(crash);
+//				}
 
-				if (SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).mCrashReset) {
-					// showToast(mContext, "很抱歉，程序遭遇异常，即将重启");
-					resetApp(0);
-				}
+//				if (SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).mCrashReset) {
+//					 showToast(mContext, "很抱歉，程序遭遇异常，即将重启");
+//					resetApp(0);
+//				}
 			}
 		});
 	}
@@ -155,8 +155,9 @@ public class SystemCrash extends BaseSystem {
 
 		sb.append(obtainExceptionInfo(ex));
 
-		File dir = new File(SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).mCacheDir
-				+ "/crash");
+		File dir = null;
+//		File dir = new File(SystemManager.getInstance().getSystem(SystemFrameworkConfig.class).mCacheDir
+//				+ "/crash");
 		if (!dir.exists()) {
 			dir.mkdir();
 		}

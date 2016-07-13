@@ -19,28 +19,12 @@ import cn.smssdk.SMSSDK;
 public class SystemMsmAuth extends BaseSystem {
     private static final String TAG = "SystemMsmAuth";
 
-    public static final String APPKEY = "d664406ed3f0";
-    public static final String APPSECRET = "542088ef34d34bf2884ea9c1bad33e8a";
-
     private static EventHandler mEventHandler;
     private IMsmAuthCallBack mCallBack;
 
     @Override
     protected void init() {
         super.init();
-        //		SMSSDK.initSDK(mContext, APPKEY, APPSECRET);
-//		mEventHandler = new EventHandler() {
-//
-//			@Override
-//			public void afterEvent(int arg0, int arg1, Object arg2) {
-//				Message msg = new Message();
-//				msg.arg1 = arg0;
-//				msg.arg2 = arg1;
-//				msg.obj = arg2;
-//				mHandler.sendMessage(msg);
-//			}
-//		};
-//		SMSSDK.registerEventHandler(mEventHandler);
     }
 
     @Override
@@ -53,8 +37,8 @@ public class SystemMsmAuth extends BaseSystem {
         mEventHandler = null;
     }
 
-    public void initSharedSDK(Context context) {
-        SMSSDK.initSDK(context, APPKEY, APPSECRET);
+    public void initSharedSDK(Context context, String appKey, String appSecret) {
+        SMSSDK.initSDK(context, appKey, appSecret);
         mEventHandler = new EventHandler() {
 
             @Override

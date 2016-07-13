@@ -18,8 +18,8 @@ public class SystemVersionUpgrade extends BaseSystem {
 	@Override
 	protected void init() {
 		super.init();
-		mComponentUpgradeApk = new ComponentUpgradeApk(mContext, SystemManager.getInstance()
-				.getSystem(SystemFrameworkConfig.class).mCacheDir);
+//		mComponentUpgradeApk = new ComponentUpgradeApk(mContext, SystemManager.getInstance()
+//				.getSystem(SystemFrameworkConfig.class).mCacheDir);
 	}
 
 	@Override
