@@ -1,0 +1,130 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+
+android {
+    resourcePrefix "cc_" //随意填写
+
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 21
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    buildTypes {
+        release {
+            // 是否进行混淆
+            minifyEnabled false
+            //去除无用的resource文件
+//            shrinkResources true
+            // 混淆文件的位置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉。
+    lintOptions {
+        abortOnError false
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/pullrefresh', 'src/main/photoview', 'src/main/share', 'src/main/imageloader', 'src/main/java']
+            res.srcDirs = ['src/main/res']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.fxtv.framework:push-ymeng:0.0.2'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile files('libs/open_sdk_r5756_lite.jar')
+    compile files('libs/libammsdk.jar')
+}
+
+// 这个version是区分library版本的，因此当我们需要更新library时记得修改这个version
+// 这个version影响后面的引用
+version = "0.1.0"
+
+def siteUrl = 'https://github.com/var1993/framework'   // 项目的主页
+def gitUrl = 'git@github.com:var1993/framework.git'   // Git仓库的url
+group = "com.fxtv.framework"
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                // Add your description here
+                name 'fxtv framework'     //项目的描述 你可以多写一点
+                url siteUrl
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'var'        //填写的一些基本信息
+                        name 'var'
+                        email 'var_1993@sina.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = "framework-fxtv"    //发布到JCenter上的项目名字
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}

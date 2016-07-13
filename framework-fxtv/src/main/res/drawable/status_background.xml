@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <!-- 状态栏渐变色 555555-->
+    <gradient
+        android:endColor="@color/color_white"
+        android:startColor="@color/colorPrimary1"
+        android:angle="270"
+        android:type="linear" />
+
+</shape>

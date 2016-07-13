@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@drawable/toolbar_background"
+    app:navigationIcon="?attr/homeAsUpIndicator"
+    app:popupTheme="@style/AppTheme.PopupOverlay"
+    app:theme="@style/ToolBarStyle"
+    > <!--
+
+        android:elevation="3dp" 阴影
+
+    更多popup的弹出显示方式-->
+
+    <TextView
+        android:id="@+id/tool_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:maxLines="1"
+        android:visibility="gone"
+        android:textColor="@color/text_color_default"
+        android:textSize="17sp" />
+
+</android.support.v7.widget.Toolbar>
+
