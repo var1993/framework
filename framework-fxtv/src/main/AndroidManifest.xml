@@ -218,12 +218,12 @@
         <!-- V1.3.0添加的service，负责下载通知的资源 -->
         <service android:name="com.umeng.message.UmengDownloadResourceService"/>
 
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="55c9a7abe0f55aded9002f2d"></meta-data>
-        <meta-data
-            android:name="UMENG_MESSAGE_SECRET"
-            android:value="856ded8d7286a4ed0bb22f43d1cf8f77"></meta-data>
+        <!--<meta-data-->
+        <!--android:name="UMENG_APPKEY"-->
+        <!--android:value="55c9a7abe0f55aded9002f2d"></meta-data>-->
+        <!--<meta-data-->
+        <!--android:name="UMENG_MESSAGE_SECRET"-->
+        <!--android:value="856ded8d7286a4ed0bb22f43d1cf8f77"></meta-data>-->
         <!-- 将"android:value"中的"Channel ID"替换为APP的推广渠道。 -->
         <!--<meta-data-->
         <!--android:name="UMENG_CHANNEL"-->
