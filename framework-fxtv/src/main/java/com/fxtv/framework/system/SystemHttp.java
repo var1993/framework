@@ -101,7 +101,6 @@ public class SystemHttp extends BaseSystem {
             callBack.onStart();
         }
 
-
         if (requestData.isUseCache()) {
             String key = String.format("%s?%s", requestData.getUrl(), constructorParamsForGet(requestData.getRequestParams()));
             Logger.d(TAG_REQUEST, String.format("net,flag=%s,cache key=%s", requestData.getLogFlag(), key));

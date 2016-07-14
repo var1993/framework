@@ -41,6 +41,8 @@ public class Configuration {
      */
     private long mCacheValidityDataFlawRate;
 
+    private boolean mEnableDebugMode;
+
     public Configuration(Builder builder) {
         mEnableLog = builder.mEnableLog;
         mEnableLogFile = builder.mEnableLogFile;
@@ -49,62 +51,67 @@ public class Configuration {
         mEnableCrashLogFile = builder.mEnableCrashLogFile;
         mCacheValidityDataWifiRate = builder.mCacheValidityDataWifiRate;
         mCacheValidityDataFlawRate = builder.mCacheValidityDataFlawRate;
+        mEnableDebugMode = builder.mEnableDebugMode;
     }
 
     public boolean isEnableLog() {
         return mEnableLog;
     }
 
-    public boolean isEnableLogFile() {
-        return mEnableLogFile;
-    }
-
-    public String getLogFilePath() {
-        return mLogFilePath;
-    }
-
-    public boolean isEnableCrashReset() {
-        return mEnableCrashReset;
-    }
-
-    public boolean isEnableCrashLogFile() {
-        return mEnableCrashLogFile;
-    }
-
-    public long getCacheValidityDataWifiRate() {
-        return mCacheValidityDataWifiRate;
-    }
-
-    public long getCacheValidityDataFlawRate() {
-        return mCacheValidityDataFlawRate;
-    }
-
     public void setEnableLog(boolean enableLog) {
         mEnableLog = enableLog;
+    }
+
+    public boolean isEnableLogFile() {
+        return mEnableLogFile;
     }
 
     public void setEnableLogFile(boolean enableLogFile) {
         mEnableLogFile = enableLogFile;
     }
 
+    public String getLogFilePath() {
+        return mLogFilePath;
+    }
+
     public void setLogFilePath(String logFilePath) {
         mLogFilePath = logFilePath;
+    }
+
+    public boolean isEnableCrashReset() {
+        return mEnableCrashReset;
     }
 
     public void setEnableCrashReset(boolean enableCrashReset) {
         mEnableCrashReset = enableCrashReset;
     }
 
+    public boolean isEnableCrashLogFile() {
+        return mEnableCrashLogFile;
+    }
+
     public void setEnableCrashLogFile(boolean enableCrashLogFile) {
         mEnableCrashLogFile = enableCrashLogFile;
+    }
+
+    public long getCacheValidityDataWifiRate() {
+        return mCacheValidityDataWifiRate;
     }
 
     public void setCacheValidityDataWifiRate(long cacheValidityDataWifiRate) {
         mCacheValidityDataWifiRate = cacheValidityDataWifiRate;
     }
 
+    public long getCacheValidityDataFlawRate() {
+        return mCacheValidityDataFlawRate;
+    }
+
     public void setCacheValidityDataFlawRate(long cacheValidityDataFlawRate) {
         mCacheValidityDataFlawRate = cacheValidityDataFlawRate;
+    }
+
+    public boolean isEnableDebugMode() {
+        return mEnableDebugMode;
     }
 
     public static class Builder {
@@ -143,6 +150,8 @@ public class Configuration {
          */
         private long mCacheValidityDataFlawRate = 10 * 60 * 1000;
 
+        private boolean mEnableDebugMode;
+
         public Builder setEnableLog(boolean enableLog) {
             mEnableLog = enableLog;
             return this;
@@ -178,7 +187,8 @@ public class Configuration {
             return this;
         }
 
-        public Builder setDebugModel(boolean debugModel) {
+        public Builder setEnableDebugModel(boolean debugModel) {
+            mEnableDebugMode = debugModel;
             if (debugModel) {
                 mEnableLog = true;
                 mEnableLogFile = true;

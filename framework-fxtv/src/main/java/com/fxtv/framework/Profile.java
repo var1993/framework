@@ -15,7 +15,7 @@ public class Profile {
     public static void initProfile(Context context, Configuration configuration) {
         mContext = context;
         if (configuration == null) {
-            configuration = new Configuration.Builder().setDebugModel(false).build();
+            configuration = new Configuration.Builder().setEnableDebugModel(true).build();
         }
         mConfiguration = configuration;
         SystemManager.getInstance().getSystem(SystemCrash.class);
