@@ -19,4 +19,8 @@ public abstract class BaseLoginComponent extends BaseComponent {
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
     }
+
+    public String getKey() {
+        return mTLoginModel.mKey;
+    }
 }

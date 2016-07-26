@@ -122,6 +122,10 @@ public class SystemThirdPartyLogin extends BaseSystem {
         }
     }
 
+    public BaseLoginComponent getLoginComponent() {
+        return mLoginComponent;
+    }
+
     public interface ICallBackSystemLogin {
         void onSuccess(String id, String id2);
 

@@ -9,6 +9,7 @@ import com.fxtv.framework.R;
 import com.fxtv.framework.component.ShareWeChatComponent;
 import com.fxtv.framework.system.SystemManager;
 import com.fxtv.framework.system.SystemShare;
+import com.fxtv.framework.system.SystemThirdPartyLogin;
 import com.fxtv.framework.utils.Logger;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
@@ -26,7 +27,12 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wx_layout);
-        String key = SystemManager.getInstance().getSystem(SystemShare.class).getCurrentComponent().getKey();
+        String key = "";
+        if (SystemManager.getInstance().getSystem(SystemThirdPartyLogin.class).getLoginComponent() != null) {
+            key = SystemManager.getInstance().getSystem(SystemThirdPartyLogin.class).getLoginComponent().getKey();
+        } else if (SystemManager.getInstance().getSystem(SystemShare.class).getCurrentComponent() != null) {
+            key = SystemManager.getInstance().getSystem(SystemShare.class).getCurrentComponent().getKey();
+        }
         mApi = WXAPIFactory.createWXAPI(this, key, false);
         mApi.registerApp(key);
         mApi.handleIntent(getIntent(), this);
