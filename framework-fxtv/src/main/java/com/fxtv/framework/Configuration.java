@@ -8,7 +8,7 @@ import android.os.Environment;
  */
 public class Configuration {
     /**
-     * Log 开关cc
+     * Log 开关dd
      */
     private boolean mEnableLog;
 
