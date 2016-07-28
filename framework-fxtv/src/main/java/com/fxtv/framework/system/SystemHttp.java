@@ -204,7 +204,8 @@ public class SystemHttp extends BaseSystem {
                                 });
                             }
                             if (requestData.isCacheEnable()) { // 缓存数据
-                                SystemManager.getInstance().getSystem(SystemHttpCache.class).updateCache(call.request().url().toString(), responseStr);
+                                String key = String.format("%s?%s", requestData.getUrl(), constructorParamsForGet(requestData.getRequestParams()));
+                                SystemManager.getInstance().getSystem(SystemHttpCache.class).updateCache(key, responseStr);
                             }
                         } else {
                             Logger.d(TAG_RESPONSE, String.format("netGet,flag=%s,model=%s,onResponse,isSuccessful,code is failure,msg=%s", requestData.getLogFlag(), model, resp.mMessage));
@@ -286,7 +287,8 @@ public class SystemHttp extends BaseSystem {
                                 });
                             }
                             if (requestData.isCacheEnable()) { // 缓存数据
-                                SystemManager.getInstance().getSystem(SystemHttpCache.class).updateCache(call.request().url().toString(), responseStr);
+                                String key = String.format("%s?%s", requestData.getUrl(), constructorParamsForGet(requestData.getRequestParams()));
+                                SystemManager.getInstance().getSystem(SystemHttpCache.class).updateCache(key, responseStr);
                             }
                         } else {
                             Logger.d(TAG_RESPONSE, String.format("netPost,flag=%s,model=%s,onResponse,code is failure,msg=%s", requestData.getLogFlag(), model, resp.mMessage));

@@ -1,11 +1,11 @@
 package com.fxtv.framework.system;
 
-import java.sql.SQLException;
-
 import com.fxtv.framework.frame.BaseSystem;
-import com.fxtv.framework.orm.DatabaseHelperFramework;
 import com.fxtv.framework.model.Cache;
+import com.fxtv.framework.orm.DatabaseHelperFramework;
 import com.j256.ormlite.dao.Dao;
+
+import java.sql.SQLException;
 
 /**
  * http缓存系统
@@ -36,7 +36,7 @@ public class SystemHttpCache extends BaseSystem {
 			cache = (Cache) dao.queryForId(key);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new RuntimeException("getCache error");
+//			throw new RuntimeException("getCache error");
 		}
 		return cache;
 	}
@@ -54,7 +54,7 @@ public class SystemHttpCache extends BaseSystem {
 			dao.createOrUpdate(cache);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new RuntimeException("updateCache Error");
+//			throw new RuntimeException("updateCache Error");
 		}
 	}
 }

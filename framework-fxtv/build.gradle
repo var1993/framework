@@ -58,7 +58,7 @@ dependencies {
 
 // 这个version是区分library版本的，因此当我们需要更新library时记得修改这个version
 // 这个version影响后面的引用
-version = "0.2.5"
+version = "0.2.7"
 
 def siteUrl = 'https://github.com/var1993/framework'   // 项目的主页
 def gitUrl = 'git@github.com:var1993/framework.git'   // Git仓库的url
